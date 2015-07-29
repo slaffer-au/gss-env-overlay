@@ -37,4 +37,4 @@ bash_setup = "exec /bin/bash -rcfile %s" % bashrc_file
 print bashrc_file
 print bash_setup
 
-subprocess.call(['screen', '-dmS' , user ])
+subprocess.call(['screen', '-dmS' , user , 'sh' , '-c' , bash_setup])
