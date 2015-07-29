@@ -3,7 +3,7 @@
 import os
 import subprocess
 import argparse
-
+import time
 
 # Argument parse for username
 parser = argparse.ArgumentParser(description="GSS Environment Overlay.")
@@ -28,13 +28,22 @@ def get_user():
     
     return check_user(user)
 
+def screenrc_setup(user):
+    rc_file = "/usr/lib/gss-env-overlay/screenrc"
+    rc_file.write("logfile /var/support/gss/%s.%d" % user, start_time
 
+def start_screen(user):
+
+    bashrc_file = "/tmp/%s.bashrc" % user
+
+    bash_setup = "exec /bin/bash -rcfile %s" % bashrc_file
+
+    print bashrc_file
+    print bash_setup
+
+    subprocess.call(['screen', '-dmSL' , user , 'sh' , '-c' , bash_setup])
+
+start_time = time.time()
 user = get_user()
-bashrc_file = "/tmp/%s.bashrc" % user
+start_screen(user)
 
-bash_setup = "exec /bin/bash -rcfile %s" % bashrc_file
-
-print bashrc_file
-print bash_setup
-
-subprocess.call(['screen', '-dmS' , user , 'sh' , '-c' , bash_setup])
