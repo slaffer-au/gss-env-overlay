@@ -22,7 +22,6 @@ def get_user():
 
     if not args.user:
         user = raw_input("Username: ")
-        print("args "+user)
     
     else:
         user = args.user
@@ -31,5 +30,11 @@ def get_user():
 
 
 user = get_user()
+bashrc_file = "/tmp/%s.bashrc" % user
+
+bash_setup = "exec /bin/bash -rcfile %s" % bashrc_file
+
+print bashrc_file
+print bash_setup
 
 subprocess.call(['screen', '-dmS' , user ])
