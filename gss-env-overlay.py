@@ -29,9 +29,13 @@ def get_user():
     return check_user(user)
 
 def screenrc_setup(user):
-    rc_file = "/etc/gss-env-overlay/screenrc"
-    rc_file.open("w")
-    rc_file.write("logfile /var/support/gss/%s.%s" % user, start_time)
+    rc_file = open("/etc/gss-env-overlay/screenrc" , "r+")
+
+    warning = "WARNING: This file will be over-written on each iteration by the script.\n\n"
+    rc_file.write(warning)    
+
+    rc_file.write("logfile /var/support/gss/%s.%s\n" % (user, start_time))
+    rc_file.close()
 
 def start_screen(user):
 
@@ -42,10 +46,11 @@ def start_screen(user):
     print bashrc_file
     print bash_setup
 
-    subprocess.call(['screen', '-dmSL' , user , '-c' , rc_file , 'sh' , '-c' , bash_setup])
+    subprocess.call(['screen', '-dmSL' , user , '-c' , "/etc/gss-env-overlay/screenrc" , 'sh' , '-c' , bash_setup])
 
 start_time = time.time()
 user = get_user()
 screenrc_setup(user)
 start_screen(user)
 
+subprocess.call(["screen" , "-r"])
