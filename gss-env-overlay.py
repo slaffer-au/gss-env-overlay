@@ -10,6 +10,10 @@ parser = argparse.ArgumentParser(description="GSS Environment Overlay.")
 parser.add_argument('--user', '-u', action="store", dest="user", help="Username of GSS user")                    
 args = parser.parse_args()   
 
+# Check to see if all the system files are present
+def env_check():
+    
+
 def get_user():
     
     # Who are the people we have files for?
