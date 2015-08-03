@@ -4,6 +4,7 @@ import os
 import subprocess
 import argparse
 import time
+from posix import mkdir
 
 # Argument parse for username
 parser = argparse.ArgumentParser(description="GSS Environment Overlay.")
@@ -31,9 +32,13 @@ def get_user():
 
 def screenrc_setup(user):
     try:
-        rc_file = open("/etc/gss-env-overlay/screenrc" , "r+")
-    except:
-        
+        rc_file = open("/etc/gss-env-overlay/screenrc" , "w+")
+    except IOError, ec:
+        if ec.errno != 17:
+            raise 
+        print "Couldn't find that file"
+        mkdir("/etc/gss-env-overlay", 0755)
+        rc_file = open("/etc/gss-env-overlay/screenrc" , "w+")
 
     warning = "WARNING: This file will be over-written on each iteration by the script.\n\n"
     rc_file.write(warning)    
