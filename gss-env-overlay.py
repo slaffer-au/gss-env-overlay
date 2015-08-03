@@ -31,7 +31,7 @@ def get_user():
 def screenrc_setup(user):
     rc_file = "/etc/gss-env-overlay/screenrc"
     rc_file.open("w")
-    rc_file.write("logfile /var/support/gss/%s.%s" % user, start_time)
+    rc_file.write("logfile /var/support/gss/%s.%s\n" % user, start_time)
 
 def start_screen(user):
 
