@@ -10,10 +10,7 @@ parser = argparse.ArgumentParser(description="GSS Environment Overlay.")
 parser.add_argument('--user', '-u', action="store", dest="user", help="Username of GSS user")                    
 args = parser.parse_args()   
 
-# Check to see if all the system files are present
-def env_check():
-    
-
+        
 def get_user():
     
     # Who are the people we have files for?
@@ -33,7 +30,10 @@ def get_user():
     return check_user(user)
 
 def screenrc_setup(user):
-    rc_file = open("/etc/gss-env-overlay/screenrc" , "r+")
+    try:
+        rc_file = open("/etc/gss-env-overlay/screenrc" , "r+")
+    except:
+        
 
     warning = "WARNING: This file will be over-written on each iteration by the script.\n\n"
     rc_file.write(warning)    
