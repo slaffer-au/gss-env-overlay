@@ -7,7 +7,7 @@ import time
 
 # Argument parse for username
 parser = argparse.ArgumentParser(description="GSS Environment Overlay.")
-parser.add_argument('--user', '-u', action="store", dest="user", help="Username of GSS user")                    
+parser.add_argument('-u', '--user', action="store", dest="user", help="Username of GSS user")                    
 args = parser.parse_args()   
 
 setup_path = '/etc/gss-env-overlay/'
